@@ -1,0 +1,54 @@
+{
+  "tweets": [
+    {
+      "id": "0",
+      "message": "Hello World",
+      "author": "Joao",
+      "date": "2022-01-01",
+      "likes": 0,
+      "follow": false,
+      "liked": false
+    },
+    {
+      "id": "1",
+      "message": "Mais um dia, mais um bug resolvido... e três novos criados. 🫠 #vidadev",
+      "img": "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
+      "author": "Ana_Dev",
+      "date": "2026-05-18",
+      "likes": 42,
+      "follow": true,
+      "liked": false
+    },
+    {
+      "id": "2",
+      "message": "Alguém já tomou o terceiro café hoje ou sou só eu? ☕️✨",
+      "img": "",
+      "author": "Cafeina_Pure",
+      "date": "2026-05-20",
+      "likes": 15,
+      "follow": false,
+      "liked": false
+    },
+    {
+      "id": "3",
+      "message": "A olhar para o horizonte a fingir que sei exatamente o que estou a fazer com a minha vida.",
+      "img": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
+      "author": "Carlos_Viagens",
+      "date": "2026-05-21",
+      "likes": 128,
+      "follow": true,
+      "liked": false
+    },
+    {
+      "id": "4",
+      "message": "Se o código funciona, não lhe toques. É a regra de ouro.",
+      "img": "",
+      "author": "Senior_Senior",
+      "date": "2026-05-21",
+      "likes": 310,
+      "follow": false,
+      "liked": false
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
