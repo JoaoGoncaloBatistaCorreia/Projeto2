@@ -32,9 +32,7 @@ export default function Feed({ handleSignout }) {
 
   const handleToggleFollow = (id) => {
     setTweetData(
-      tweetData.map((t) =>
-        t.id === id ? { ...t, follow: !t.follow } : t
-      )
+      tweetData.map((t) => (t.id === id ? { ...t, follow: !t.follow } : t)),
     );
   };
 
@@ -52,7 +50,7 @@ export default function Feed({ handleSignout }) {
         }
 
         return t;
-      })
+      }),
     );
   };
 
@@ -60,9 +58,7 @@ export default function Feed({ handleSignout }) {
     axios
       .delete(`http://localhost:3000/tweets/${id}`)
       .then(() => {
-        setTweetData((tweetsList) =>
-          tweetsList.filter((t) => t.id !== id)
-        );
+        setTweetData((tweetsList) => tweetsList.filter((t) => t.id !== id));
       })
       .catch((error) => {
         console.error("Error deleting tweet:", error);
@@ -84,9 +80,7 @@ export default function Feed({ handleSignout }) {
       })
       .then((response) => {
         setTweetData((tweetsList) =>
-          tweetsList.map((t) =>
-            t.id === id ? { ...t, ...response.data } : t
-          )
+          tweetsList.map((t) => (t.id === id ? { ...t, ...response.data } : t)),
         );
       })
       .catch((error) => {
@@ -94,13 +88,52 @@ export default function Feed({ handleSignout }) {
       });
   };
 
+const handleSearchTweet = async (searchText) => {
+  if (!searchText.trim()) {
+    getData();
+    return;
+  }
+
+  try {
+    const response = await axios.get("http://localhost:3000/tweets");
+
+    const filteredTweets = response.data.filter((tweet) =>
+      tweet.message.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    setTweetData(filteredTweets);
+  } catch (error) {
+    console.error("Erro ao pesquisar tweets:", error);
+  }
+};
+
+const handleSearchAuthor = async (searchText) => {
+  if (!searchText.trim()) {
+    getData();
+    return;
+  }
+
+  try {
+    const response = await axios.get("http://localhost:3000/tweets");
+
+    const filteredTweets = response.data.filter((tweet) =>
+      tweet.author.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    setTweetData(filteredTweets);
+  } catch (error) {
+    console.error("Erro ao pesquisar tweets:", error);
+  }
+};
+
+
   function handleImageUpload(e) {
     const file = e.target.files[0];
 
     if (!file || !file.type.startsWith("image/")) return;
 
     if (file.size > 100 * 1024) {
-      alert("Imagem demasiado grande.");
+      alert("Ficheiro demasiado grande.");
       return;
     }
 
@@ -156,7 +189,7 @@ export default function Feed({ handleSignout }) {
         overflow: "hidden",
       }}
     >
-      <LeftMenu handleSignout={handleSignout} />
+      <LeftMenu handleSignout={handleSignout} handleSearchTweet={handleSearchTweet} handleSearchAuthor={handleSearchAuthor}/>
 
       <div
         style={{
@@ -172,8 +205,11 @@ export default function Feed({ handleSignout }) {
           style={{
             display: "flex",
             margin: "10px",
+            padding: "5px",
             gap: "8px",
             alignItems: "center",
+              borderRadius: "10px",
+              border: "1px solid #ddd"
           }}
         >
           <input
@@ -183,21 +219,24 @@ export default function Feed({ handleSignout }) {
             placeholder="No que está a pensar?"
             style={{
               flex: 1,
-              padding: "10px",
+              padding: "5px",
               borderRadius: "10px",
-              border: "1px solid #ddd",
+              border: 0,
+              backgroundColor: "transparent"
             }}
           />
 
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-          />
+          <label className="upload-box">
+            <input accept="image/*" type="file" hidden onChange={handleImageUpload}/>
+
+            <div className="upload-content">
+              <span className="icon">+</span>
+            </div>
+          </label>
 
           <button
             type="submit"
-            className={`buttonstyle btn btn-primary ${
+            className={`btn ${
               !prompt.trim() && !img ? "disabled" : ""
             }`}
           >

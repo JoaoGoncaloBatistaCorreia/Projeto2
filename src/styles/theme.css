@@ -61,3 +61,47 @@ align-self: flex-start;
 .dark .buttonfeedstyle{
   color: white;
 }
+
+.dark input {
+  color: white;
+}
+
+.upload-box {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.upload-content {
+  width: 40px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+  border-radius: 30px;
+}
+
+.upload-content:hover {
+  background-color: #eeeeee;
+}
+
+.dark .upload-content:hover {
+  background-color: grey;
+}
+
+.dark .input-search {
+ color: white;
+}
+
+.input-search {
+  max-width: 100%;
+  padding: 8px 8px;
+  border-radius: 50px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 5px;
+  background-color: transparent;
+  transition: 0.2s;
+}

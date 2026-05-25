@@ -3,7 +3,7 @@ import { ThemeContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
 
-function LeftMenu({handleSignout}) {
+function LeftMenu({handleSignout, handleSearchTweet, handleSearchAuthor}) {
   const themeContext = useContext(ThemeContext);
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ function LeftMenu({handleSignout}) {
           onClick={() =>
             navigate("/Dashboard")
           }
-          className="btn btn-primary buttonstyle"
+          className="btn buttonstyle"
         >
           Dashboard
         </button>
@@ -45,9 +45,20 @@ function LeftMenu({handleSignout}) {
       </div>
 
       <div style={{ flex: 1, overflowY: "auto" }}>
-        oi
-        oi
-        io
+         <input
+      type="text"
+      placeholder="Pesquisar tweets"
+      onChange={(e) => handleSearchTweet(e.target.value)}
+      className="input-search"
+    />
+
+    <input
+      type="text"
+      placeholder="Pesquisar por autor"
+      onChange={(e) => handleSearchAuthor(e.target.value)}
+      className="input-search"
+    />
+
       </div>
       <div className="row" style={{ marginTop: "auto" }}>
         <button className="btn btn-outline-danger buttonstyle" onClick={handleSignout}>
@@ -58,7 +69,7 @@ function LeftMenu({handleSignout}) {
           onClick={() => {
             themeContext.setTheme("light");
           }}
-          className="btn btn-primary buttonstyle"
+          className="btn buttonstyle"
         >
           Modo claro
         </button>
@@ -67,7 +78,7 @@ function LeftMenu({handleSignout}) {
           onClick={() => {
             themeContext.setTheme("dark");
           }}
-          className="btn btn-primary buttonstyle"
+          className="btn buttonstyle"
         >
           Modo escuro
         </button>
